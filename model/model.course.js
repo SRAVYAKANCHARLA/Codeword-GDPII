@@ -1,7 +1,7 @@
 /**
  * @author Sravya Kancharla <S531500@nwmissouri.edu>
  */
-
+// This is Course model 
 var mongoose = require('mongoose');
 var validator = require('validator');
 
@@ -11,7 +11,7 @@ var CourseModel = mongoose.model('courseModel', {
     required: true,
     trim: true,
     unique:true,
-    minlength: 5
+    minlength: 3
    },
    emailKey:{
     type: String,

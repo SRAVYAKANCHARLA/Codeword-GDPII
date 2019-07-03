@@ -75,6 +75,7 @@
 
 
       <!-- Modal Edit Course -->
+      
 <div class="modal fade" id="editcodeword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -147,7 +148,8 @@ export default {
         texts: {
           filterPlaceholder: 'Search Codeword',
           filter: '',
-          limit: ''
+          limit: '',
+          noResults: 'No Codewords'
         },
         sortIcon: { base: 'fas', up: 'fa-chevron-up', down: 'fa-chevron-down', is: 'fa-sort' }
       },
@@ -179,6 +181,11 @@ export default {
     }
   },
   methods: {
+    /**
+     *
+     *Get the codeword from JSON Object
+     *@ return the codewords
+     */
     async getCodeWords () {
       axios({
         method: 'post',
@@ -203,10 +210,12 @@ export default {
         this.data = JSON.parse(JSON.stringify(codewordsjson))
       })
     },
+    // Gets the selected codeword
     selectCodeword (index) {
       this.codewordIndex = index
       this.selectedCodeword = this.data[index].CodewordName
     },
+    // Edits the codeword
     editCodeword (selectedCodeword, index) {
       if (this.codewords.includes(this.selectedCodeword.toUpperCase())) {
         swal('Codeword already exists! Please add different Codeword!!')
@@ -216,6 +225,7 @@ export default {
         $('#editcodeword').modal('hide')
       }
     },
+    // Deletes the codeword
     deleteCodeword () {
       this.codewords.splice(this.codewordIndex, 1)
       this.updateCodeword()
@@ -269,6 +279,7 @@ export default {
         this.getCodeWords()
       })
     },
+    // Adds the codeword
     selectCodewordSet (setName) {
       this.CodewordSetName = setName
     }
